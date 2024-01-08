@@ -4,10 +4,7 @@ import Br.mesRecettes.entities.Recettes;
 import Br.mesRecettes.repositories.RecettesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +28,16 @@ public class RecettesController
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/add")
+    public void addRecette (@RequestBody Recettes r){
+        Recettes recette = new Recettes();
+        recette.setTitre(r.getTitre());
+        recette.setPreparation(r.getPreparation());
+        recette.setImageTitre(r.getImageTitre());
+
+        recettesRepository.save(recette);
     }
 
 }
