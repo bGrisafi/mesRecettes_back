@@ -1,43 +1,32 @@
 package Br.mesRecettes.controllers;
 
-import Br.mesRecettes.entities.Recettes;
-import Br.mesRecettes.repositories.RecettesRepository;
+import Br.mesRecettes.entities.RecettesEntity;
+import Br.mesRecettes.services.RecettesService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/recettes")
 @RequiredArgsConstructor
-public class RecettesController
-{
-    private final RecettesRepository recettesRepository;
-
-    @GetMapping("/all")
-    public List<Recettes> findAllRecettes () { return (List<Recettes>) recettesRepository.findAll();}
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Recettes> findRecetteByID (@PathVariable(value = "id") long id) {
-        Optional<Recettes> recette = recettesRepository.findById(id);
-
-        if(recette.isPresent()){
-            return ResponseEntity.ok().body(recette.get());
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+public class RecettesController {
+    private final RecettesService recettesService;
+    @GetMapping
+   public List<RecettesEntity> findAllRecettes() {
+        return recettesService.findAll();
     }
 
-    @PostMapping("/add")
-    public void addRecette (@RequestBody Recettes r){
-        Recettes recette = new Recettes();
-        recette.setTitre(r.getTitre());
-        recette.setPreparation(r.getPreparation());
-        recette.setImageTitre(r.getImageTitre());
+    @GetMapping("{id}")
+    public ResponseEntity<RecettesEntity> findRecetteByID(@PathVariable long id) {
+        return recettesService.findByID(id);
+    }
 
-        recettesRepository.save(recette);
+    @PostMapping
+    public RecettesEntity addRecette(@Valid @RequestBody RecettesEntity r) {
+        return recettesService.save(r);
     }
 
 }
