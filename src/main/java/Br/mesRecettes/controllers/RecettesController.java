@@ -28,5 +28,14 @@ public class RecettesController {
     public RecettesEntity addRecette(@Valid @RequestBody RecettesEntity r) {
         return recettesService.save(r);
     }
+    @PostMapping("{id}")
+    public RecettesEntity updateRecette(@Valid @RequestBody RecettesEntity r){
+        return recettesService.update(r);
+    }
+    @DeleteMapping("{id}")
+    public void deleteRecette(@PathVariable long id){
+        recettesService.delete(id);
+    }
+
 
 }

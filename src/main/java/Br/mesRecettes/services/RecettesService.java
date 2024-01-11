@@ -2,11 +2,9 @@ package Br.mesRecettes.services;
 
 import Br.mesRecettes.entities.RecettesEntity;
 import Br.mesRecettes.repositories.RecettesRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,12 +25,21 @@ public class RecettesService {
         }
     }
 
-    public RecettesEntity save(@Valid @RequestBody RecettesEntity r) {
+    public RecettesEntity save(RecettesEntity r) {
         RecettesEntity recette = new RecettesEntity();
         recette.setTitre(r.getTitre());
         recette.setPreparation(r.getPreparation());
         recette.setImageTitre(r.getImageTitre());
 
         return recettesRepository.save(recette);
+    }
+
+    //TODO modifier l'update pour le rendre plus efficient (DTO et Mapper pour éviter d'update tous les champs)
+    public RecettesEntity update(RecettesEntity r){
+        return recettesRepository.save(r);
+    }
+
+    public void delete(long id){
+        recettesRepository.deleteById(id);
     }
 }
