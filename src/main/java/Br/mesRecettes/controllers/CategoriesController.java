@@ -28,7 +28,17 @@ public class CategoriesController {
     }
 
     @PostMapping
-    public CategoriesEntity saveCategorie(@Valid @RequestBody CategoriesEntity categorie) {
-        return categoriesService.save(categorie);
+    public CategoriesEntity saveCategorie(@Valid @RequestBody CategoriesEntity c) {
+        return categoriesService.save(c);
+    }
+
+    @PostMapping("{id}")
+    public CategoriesEntity updateCategorie(@Valid @RequestBody CategoriesEntity c){
+        return categoriesService.update(c);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteCategorie(@PathVariable long id){
+        categoriesService.delete(id);
     }
 }

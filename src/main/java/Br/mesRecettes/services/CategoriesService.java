@@ -2,11 +2,9 @@ package Br.mesRecettes.services;
 
 import Br.mesRecettes.entities.CategoriesEntity;
 import Br.mesRecettes.repositories.CategoriesRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +28,19 @@ public class CategoriesService {
         }
     }
 
-    public CategoriesEntity save(@Valid @RequestBody CategoriesEntity categorie) {
+    public CategoriesEntity save(CategoriesEntity c) {
+        CategoriesEntity categorie = new CategoriesEntity();
+        categorie.setCategorie(c.getCategorie());
         return categoriesRepository.save(categorie);
     }
+
+    public CategoriesEntity update(CategoriesEntity c) {
+        return categoriesRepository.save(c);
+    }
+
+    public void delete(long id){
+        categoriesRepository.deleteById(id);
+    }
+
+
 }
