@@ -13,7 +13,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class RecettesService {
     private final RecettesRepository recettesRepository;
-    public List<RecettesEntity> findAll(){
+
+    public List<RecettesEntity> findAll() {
         return recettesRepository.findAll();
     }
 
@@ -25,21 +26,24 @@ public class RecettesService {
         }
     }
 
+
     public RecettesEntity save(RecettesEntity r) {
         RecettesEntity recette = new RecettesEntity();
         recette.setTitre(r.getTitre());
         recette.setPreparation(r.getPreparation());
         recette.setImageTitre(r.getImageTitre());
 
+
         return recettesRepository.save(recette);
     }
 
     //TODO modifier l'update pour le rendre plus efficient (DTO et Mapper pour éviter d'update tous les champs)
-    public RecettesEntity update(RecettesEntity r){
+
+    public RecettesEntity update(RecettesEntity r) {
         return recettesRepository.save(r);
     }
 
-    public void delete(long id){
+    public void delete(long id) {
         recettesRepository.deleteById(id);
     }
 }

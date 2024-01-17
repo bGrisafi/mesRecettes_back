@@ -15,7 +15,8 @@ import java.util.Optional;
 //Tout ce que je fais ici me semble bien générique, il y a un "crudService" ou autre déjà fait dont je peux venir hériter ? Voir faire la mienne si elle existe pas
 public class CategoriesService {
     private final CategoriesRepository categoriesRepository;
-    public List<CategoriesEntity> findAll(){
+
+    public List<CategoriesEntity> findAll() {
         return categoriesRepository.findAll();
     }
 
@@ -34,11 +35,12 @@ public class CategoriesService {
         return categoriesRepository.save(categorie);
     }
 
+
     public CategoriesEntity update(CategoriesEntity c) {
         return categoriesRepository.save(c);
     }
 
-    public void delete(long id){
+    public void delete(long id) {
         categoriesRepository.deleteById(id);
     }
 

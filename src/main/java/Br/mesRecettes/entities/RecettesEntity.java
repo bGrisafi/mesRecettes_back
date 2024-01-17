@@ -1,5 +1,6 @@
 package Br.mesRecettes.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class RecettesEntity {
     @Column(name = "id")
     private long id;
 
-    @Column (name = "titre")
+    @Column(name = "titre")
     private String titre;
 
     @Column(name = "preparation")
@@ -25,6 +26,10 @@ public class RecettesEntity {
     @Column(name = "imageTitre")
     private String imageTitre;
 
-    @ManyToMany(mappedBy = "recettes")
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "recettes_has_categories",
+            joinColumns = @JoinColumn(name = "recettes_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id"))
+    @JsonIgnoreProperties("recettes")
     private List<CategoriesEntity> categories;
 }
