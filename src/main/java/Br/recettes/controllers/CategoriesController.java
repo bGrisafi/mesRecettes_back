@@ -1,7 +1,7 @@
-package Br.mesRecettes.controllers;
+package br.recettes.controllers;
 
-import Br.mesRecettes.entities.CategoriesEntity;
-import Br.mesRecettes.services.CategoriesService;
+import br.recettes.entities.CategoriesEntity;
+import br.recettes.services.CategoriesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,18 +23,18 @@ public class CategoriesController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CategoriesEntity> findCategoryByID(@PathVariable long id) {
+    public ResponseEntity<CategoriesEntity> findCategoryByID(@PathVariable Long id) {
         return categoriesService.findByID(id);
     }
 
     @PostMapping
-    public CategoriesEntity saveCategorie(@Valid @RequestBody CategoriesEntity c) {
-        return categoriesService.save(c);
+    public CategoriesEntity saveCategorie(@Valid @RequestBody CategoriesEntity categories) {
+        return categoriesService.save(categories);
     }
 
-    @PostMapping("{id}")
-    public CategoriesEntity updateCategorie(@Valid @RequestBody CategoriesEntity c){
-        return categoriesService.update(c);
+    @PutMapping("{id}")
+    public CategoriesEntity updateCategorie(@Valid @RequestBody CategoriesEntity categories, @PathVariable Long id){
+        return categoriesService.update(categories, id);
     }
 
     @DeleteMapping("{id}")

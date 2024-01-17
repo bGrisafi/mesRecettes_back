@@ -1,13 +1,13 @@
-package Br.mesRecettes;
+package br.recettes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MesRecettesApplication {
+public class RecettesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MesRecettesApplication.class, args);
+		SpringApplication.run(RecettesApplication.class, args);
 	}
 
 }

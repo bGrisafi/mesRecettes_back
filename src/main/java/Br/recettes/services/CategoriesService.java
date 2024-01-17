@@ -1,7 +1,7 @@
-package Br.mesRecettes.services;
+package br.recettes.services;
 
-import Br.mesRecettes.entities.CategoriesEntity;
-import Br.mesRecettes.repositories.CategoriesRepository;
+import br.recettes.entities.CategoriesEntity;
+import br.recettes.repositories.CategoriesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,23 +19,23 @@ public class CategoriesService {
         return categoriesRepository.findAll();
     }
 
-    //TODO refactor pour pouvoir passer les erreurs proprement au front
+    //TODO refactor pour pouvoir passer les erreurs proprement au front / handler d'exception
     public ResponseEntity<CategoriesEntity> findByID(long id) {
-        Optional<CategoriesEntity> categorie = categoriesRepository.findById(id);
-        if (categorie.isPresent()) return ResponseEntity.ok().body(categorie.get());
-        else {
-            return ResponseEntity.notFound().build();
-        }
+        return categoriesRepository
+                .findById(id)
+                .map(entity -> ResponseEntity.ok().body(entity))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    public CategoriesEntity save(CategoriesEntity c) {
+    public CategoriesEntity save(CategoriesEntity categories) {
         CategoriesEntity categorie = new CategoriesEntity();
-        categorie.setCategorie(c.getCategorie());
+        categorie.setCategorie(categories.getCategorie());
         return categoriesRepository.save(categorie);
     }
 
-    public CategoriesEntity update(CategoriesEntity c) {
-        return categoriesRepository.save(c);
+    public CategoriesEntity update(CategoriesEntity categories, Long id) {
+        categories.setId(id);
+        return categoriesRepository.save(categories);
     }
 
     public void delete(long id){

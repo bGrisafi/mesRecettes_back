@@ -1,4 +1,4 @@
-package Br.mesRecettes.entities;
+package br.recettes.entities;
 
 
 import jakarta.persistence.*;

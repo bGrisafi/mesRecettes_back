@@ -1,7 +1,7 @@
-package Br.mesRecettes.controllers;
+package br.recettes.controllers;
 
-import Br.mesRecettes.entities.RecettesEntity;
-import Br.mesRecettes.services.RecettesService;
+import br.recettes.entities.RecettesEntity;
+import br.recettes.services.RecettesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,29 +13,31 @@ import java.util.List;
 @RequestMapping("/recettes")
 @RequiredArgsConstructor
 public class RecettesController {
+
     private final RecettesService recettesService;
+
     @GetMapping
-   public List<RecettesEntity> findAllRecettes() {
+    public List<RecettesEntity> findAllRecettes() {
         return recettesService.findAll();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<RecettesEntity> findRecetteByID(@PathVariable long id) {
+    public ResponseEntity<RecettesEntity> findRecetteByID(@PathVariable Long id) {
         return recettesService.findByID(id);
     }
 
     @PostMapping
-    public RecettesEntity addRecette(@Valid @RequestBody RecettesEntity r) {
-        return recettesService.save(r);
+    public RecettesEntity addRecette(@Valid @RequestBody RecettesEntity recette) {
+        return recettesService.save(recette);
     }
+
     @PostMapping("{id}")
-    public RecettesEntity updateRecette(@Valid @RequestBody RecettesEntity r){
-        return recettesService.update(r);
+    public RecettesEntity updateRecette(@Valid @RequestBody RecettesEntity recette) {
+        return recettesService.update(recette);
     }
+
     @DeleteMapping("{id}")
-    public void deleteRecette(@PathVariable long id){
+    public void deleteRecette(@PathVariable Long id) {
         recettesService.delete(id);
     }
-
-
 }
