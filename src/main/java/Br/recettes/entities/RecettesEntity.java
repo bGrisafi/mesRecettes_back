@@ -1,5 +1,6 @@
 package br.recettes.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,5 +31,6 @@ public class RecettesEntity {
             joinColumns = @JoinColumn(name = "recettes_id"),
             inverseJoinColumns = @JoinColumn(name = "categories_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"recettes_id", "categories_id"}))
+    @JsonIgnoreProperties("recettes")
     private List<CategoriesEntity> categories;
 }
