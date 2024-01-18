@@ -14,9 +14,9 @@ public class RecettesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
-    @Column (name = "titre")
+    @Column(name = "titre")
     private String titre;
 
     @Column(name = "preparation")
@@ -25,6 +25,10 @@ public class RecettesEntity {
     @Column(name = "imageTitre")
     private String imageTitre;
 
-    @ManyToMany(mappedBy = "recettes")
+    @ManyToMany
+    @JoinTable(name = "recettes_has_categories",
+            joinColumns = @JoinColumn(name = "recettes_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"recettes_id", "categories_id"}))
     private List<CategoriesEntity> categories;
 }

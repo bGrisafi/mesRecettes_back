@@ -15,7 +15,7 @@ public class RecettesService {
 
     private final RecettesRepository recettesRepository;
 
-    public List<RecettesEntity> findAll(){
+    public List<RecettesEntity> findAll() {
         return recettesRepository.findAll();
     }
 
@@ -27,16 +27,18 @@ public class RecettesService {
         }
     }
 
+
     public RecettesEntity save(RecettesEntity recette) {
         return recettesRepository.save(recette);
     }
 
     //TODO modifier l'update pour le rendre plus efficient (DTO et Mapper pour éviter d'update tous les champs)
-    public RecettesEntity update(RecettesEntity recette){
+
+    public RecettesEntity update(RecettesEntity recette) {
         return recettesRepository.save(recette);
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         recettesRepository.deleteById(id);
     }
 }
