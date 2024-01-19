@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,17 +26,15 @@ public class CategoriesService {
                 .map(entity -> ResponseEntity.ok().body(entity))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    public CategoriesEntity save(CategoriesEntity categories) {
-        CategoriesEntity categorie = new CategoriesEntity();
-        categorie.setCategorie(categories.getCategorie());
+    //TODO change return type to a ResponseEntity and handle errors (such as wrong id for the update)
+    public CategoriesEntity save(CategoriesEntity categorie) {
         return categoriesRepository.save(categorie);
     }
 
 
-    public CategoriesEntity update(CategoriesEntity categories, Long id) {
-        categories.setId(id);
-        return categoriesRepository.save(categories);
+    public CategoriesEntity update(CategoriesEntity categorie, Long id) {
+        categorie.setId(id);
+        return categoriesRepository.save(categorie);
     }
 
     public void delete(long id) {
