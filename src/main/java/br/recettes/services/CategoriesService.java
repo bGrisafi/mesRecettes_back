@@ -33,8 +33,13 @@ public class CategoriesService {
 
 
     public CategoriesEntity update(CategoriesEntity categorie, Long id) {
-        categorie.setId(id);
-        return categoriesRepository.save(categorie);
+        if(categorie.getId() == id){
+            return categoriesRepository.save(categorie);
+        }
+        else{
+            categorie.setId(-1L);
+            return categorie;
+        }
     }
 
     public void delete(long id) {

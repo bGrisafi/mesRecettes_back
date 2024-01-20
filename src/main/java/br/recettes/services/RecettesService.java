@@ -34,8 +34,15 @@ public class RecettesService {
 
     //TODO modifier l'update pour le rendre plus efficient (DTO et Mapper pour éviter d'update tous les champs)
 
-    public RecettesEntity update(RecettesEntity recette) {
-        return recettesRepository.save(recette);
+    public RecettesEntity update(RecettesEntity recette, Long id) {
+
+        if(recette.getId() == id){
+            return recettesRepository.save(recette);
+        }
+        else{
+            recette.setId(-1L);
+            return recette;
+        }
     }
 
     public void delete(Long id) {
