@@ -18,6 +18,9 @@ public class ImagesEntity {
     private String image;
 
     @ManyToOne
-    @JoinColumn(name="recette_id", nullable = false)
+    @JoinColumn(name="recettes_id", insertable = false, updatable = false)
     private RecettesEntity recette;
+
+    @Column(name ="recettes_id")
+    private Long recettesId;
 }
