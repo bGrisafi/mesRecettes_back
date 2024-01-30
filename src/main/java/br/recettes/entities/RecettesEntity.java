@@ -26,6 +26,9 @@ public class RecettesEntity {
     @Column(name = "imageTitre")
     private String imageTitre;
 
+    @OneToMany(mappedBy = "recette")
+    private List<ImagesEntity> images;
+
     @ManyToMany
     @JoinTable(name = "recettes_has_categories",
             joinColumns = @JoinColumn(name = "recettes_id"),
@@ -33,4 +36,6 @@ public class RecettesEntity {
             uniqueConstraints = @UniqueConstraint(columnNames = {"recettes_id", "categories_id"}))
     @JsonIgnoreProperties("recettes")
     private List<CategoriesEntity> categories;
+
+
 }
