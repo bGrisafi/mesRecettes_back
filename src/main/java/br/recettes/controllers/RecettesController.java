@@ -31,9 +31,9 @@ public class RecettesController {
         return recettesService.save(recette);
     }
 
-    @PostMapping("{id}")
-    public RecettesEntity updateRecette(@Valid @RequestBody RecettesEntity recette) {
-        return recettesService.update(recette);
+    @PutMapping("{id}")
+    public RecettesEntity updateRecette(@Valid @RequestBody RecettesEntity recette, @PathVariable Long id) {
+        return recettesService.update(recette, id);
     }
 
     @DeleteMapping("{id}")
