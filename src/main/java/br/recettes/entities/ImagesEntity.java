@@ -21,6 +21,7 @@ public class ImagesEntity {
     @JoinColumn(name="recettes_id", insertable = false, updatable = false)
     private RecettesEntity recette;
 
+    //TODO create custom code in postman to mimic frontend recette create/add behaviour (will result in removing recettesId and use recette to create the DB entry)
     @Column(name ="recettes_id")
     private Long recettesId;
 }
